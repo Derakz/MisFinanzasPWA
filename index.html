@@ -44,16 +44,20 @@
         </section>
 
         <section id="goals" class="tab-content">
-            <header><h1>Mis Metas</h1></header>
-            <div class="goal-card">
-                <div class="goal-info">
-                    <span>Meta de Ahorro: <strong>Nuevo Celular</strong></span>
-                    <span id="goal-percent">0%</span>
-                </div>
-                <div class="progress-bar"><div id="progress-fill"></div></div>
-                <p class="goal-stats">Faltan: <span id="goal-remaining">$500</span></p>
-            </div>
-        </section>
+    <header>
+        <h1>Mis Metas</h1>
+        <button onclick="editGoal()" class="btn-export"><i class="fas fa-edit"></i></button>
+    </header>
+    <div class="goal-card">
+        <div class="goal-info">
+            <span>Objetivo: <strong id="goal-name">Cargando...</strong></span>
+            <span id="goal-percent">0%</span>
+        </div>
+        <div class="progress-bar"><div id="progress-fill"></div></div>
+        <p class="goal-stats">Faltan: <span id="goal-remaining">$0</span></p>
+        <p style="font-size: 10px; margin-top: 10px; opacity: 0.5;">*El progreso se basa en tu saldo actual.</p>
+    </div>
+</section>
 
         <section id="history" class="tab-content">
             <header><h1>Movimientos</h1></header>

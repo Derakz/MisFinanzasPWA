@@ -63,3 +63,67 @@ button { padding: 14px; border-radius: 12px; border: none; color: #fff; font-wei
 .nav-item { color: #94a3b8; text-align: center; font-size: 11px; cursor: pointer; }
 .nav-item.active { color: var(--primary); }
 .nav-item i { display: block; font-size: 18px; margin-bottom: 3px; }
+/* --- MEJORAS DE LA LISTA DE MOVIMIENTOS --- */
+.list-container { 
+    margin-top: 10px; 
+    list-style: none; 
+}
+
+.item { 
+    background: var(--card); 
+    padding: 15px; 
+    border-radius: 18px; 
+    margin-bottom: 10px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: transform 0.2s;
+}
+
+.item:active { transform: scale(0.98); }
+
+.item h4 { 
+    font-size: 15px; 
+    margin-bottom: 3px; 
+    color: #fff; 
+}
+
+.item small { 
+    color: #94a3b8; 
+    font-size: 12px; 
+    display: block;
+}
+
+/* Contenedor de monto y basura */
+.item-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.item-actions strong {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Estilo del botón eliminar */
+.btn-delete {
+    background: rgba(255, 71, 87, 0.1);
+    border: none;
+    color: var(--danger);
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-delete:active {
+    background: var(--danger);
+    color: #fff;
+    transform: scale(0.8);
+}
