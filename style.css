@@ -1,106 +1,39 @@
 :root {
-    --bg: #0f172a;
-    --card: #1e293b;
-    --primary: #00dc82;
-    --danger: #ff4757;
-    --text: #ffffff;
+    --primary: #00dc82; --danger: #ff4757; --bg: #0f172a; --card: #1e293b; --text: #ffffff;
 }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+body { background: var(--bg); color: var(--text); height: 100vh; overflow: hidden; }
 
-* { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
-    font-family: sans-serif;
-}
-
-body { 
-    background-color: var(--bg); 
-    color: var(--text);
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.app-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-header { padding: 20px; }
-header h1 { font-size: 24px; color: var(--primary); }
-header p { font-size: 14px; opacity: 0.7; }
-
-.tab-content {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0 20px 100px;
-    display: none;
-}
+.app-container { display: flex; flex-direction: column; height: 100%; }
+.tab-content { display: none; flex: 1; padding: 20px; overflow-y: auto; padding-bottom: 120px; }
 .tab-content.active { display: block; }
 
-/* TARJETA DE SALDO */
-.main-card {
-    background: linear-gradient(135deg, #1e293b, #334155);
-    padding: 25px;
-    border-radius: 20px;
-    margin: 15px 0;
-    border: 1px solid rgba(255,255,255,0.1);
+/* GRÁFICO */
+.chart-container { position: relative; height: 250px; margin-bottom: 20px; }
+.chart-overlay { 
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    text-align: center; pointer-events: none;
 }
-.main-card h2 { font-size: 32px; margin-top: 5px; }
+.chart-overlay span { font-size: 28px; font-weight: 900; }
 
-/* FORMULARIO */
-.quick-add {
-    background: var(--card);
-    padding: 20px;
-    border-radius: 20px;
-}
-input {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: #000;
-    color: white;
-    font-size: 16px; /* Vital para que el móvil no haga zoom */
-}
+/* METAS */
+.goal-card { background: var(--card); padding: 25px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); }
+.progress-bar { background: #000; height: 12px; border-radius: 10px; margin: 15px 0; overflow: hidden; }
+#progress-fill { background: var(--primary); height: 100%; width: 0%; transition: 1s; }
+.goal-info { display: flex; justify-content: space-between; font-size: 14px; }
 
+/* FORM Y LISTA */
+select, input { 
+    width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 12px; 
+    background: #000; border: 1px solid #334155; color: #fff; font-size: 16px; 
+}
 .grid-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.item { background: var(--card); padding: 15px; border-radius: 18px; margin-bottom: 10px; display: flex; justify-content: space-between; }
+.btn-export { background: none; border: none; color: var(--primary); font-size: 20px; }
 
-button {
-    padding: 15px;
-    border-radius: 12px;
-    border: none;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
+.bottom-nav { 
+    position: fixed; bottom: 0; width: 100%; background: #1e293b; 
+    display: flex; justify-content: space-around; padding: 15px 0 35px; border-top: 1px solid #334155;
 }
-.btn-in { background: var(--primary); }
-.btn-out { background: var(--danger); }
-
-/* LISTA */
-.item {
-    background: var(--card);
-    padding: 15px;
-    border-radius: 15px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* MENÚ INFERIOR */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #1e293b;
-    display: flex;
-    justify-content: space-around;
-    padding: 15px 0 30px; /* Espacio extra para el notch del celular */
-    border-top: 1px solid rgba(255,255,255,0.1);
-}
-.nav-item { color: #94a3b8; text-align: center; font-size: 12px; text-decoration: none; }
+.nav-item { color: #94a3b8; text-align: center; }
 .nav-item.active { color: var(--primary); }
-.nav-item i { display: block; font-size: 20px; margin-bottom: 4px; }

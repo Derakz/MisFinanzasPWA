@@ -3,67 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Finanzas Pro</title>
+    <title>Finanzas Pro Ultra</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="manifest" href="manifest.json">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
     <div class="app-container">
         <section id="home" class="tab-content active">
             <header>
-                <h1>Hola, de nuevo 👋</h1>
-                <p>Gestiona tu dinero hoy</p>
+                <h1>Resumen Visual</h1>
+                <div class="header-actions">
+                    <button onclick="exportToCSV()" class="btn-export"><i class="fas fa-file-excel"></i></button>
+                </div>
             </header>
 
-            <div class="main-card">
-                <span>Saldo Disponible</span>
-                <h2 id="total-balance">$0.00</h2>
+            <div class="chart-container">
+                <canvas id="myChart"></canvas>
+                <div class="chart-overlay">
+                    <span id="total-balance">$0</span>
+                </div>
             </div>
 
             <div class="quick-add">
-                <h3>Añadir Movimiento</h3>
-                <input type="text" id="description" placeholder="Ej: Cena, Sueldo, Cine...">
-                <input type="number" id="amount" placeholder="0.00">
+                <input type="text" id="description" placeholder="¿En qué gastaste?">
+                <input type="number" id="amount" placeholder="Monto">
+                <select id="category">
+                    <option value="🍔 Comida">🍔 Comida</option>
+                    <option value="🚗 Transporte">🚗 Transporte</option>
+                    <option value="🏠 Hogar">🏠 Hogar</option>
+                    <option value="🎮 Ocio">🎮 Ocio</option>
+                    <option value="💰 Sueldo">💰 Sueldo</option>
+                    <option value="✨ Otros">✨ Otros</option>
+                </select>
                 <div class="grid-btns">
-                    <button onclick="addTransaction('income')" class="btn-in"><i class="fas fa-arrow-up"></i> Ingreso</button>
-                    <button onclick="addTransaction('expense')" class="btn-out"><i class="fas fa-arrow-down"></i> Gasto</button>
+                    <button onclick="addTransaction('income')" class="btn-in">Ingreso</button>
+                    <button onclick="addTransaction('expense')" class="btn-out">Gasto</button>
                 </div>
             </div>
         </section>
 
+        <section id="goals" class="tab-content">
+            <header><h1>Mis Metas</h1></header>
+            <div class="goal-card">
+                <div class="goal-info">
+                    <span>Meta de Ahorro: <strong>Nuevo Celular</strong></span>
+                    <span id="goal-percent">0%</span>
+                </div>
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <p class="goal-stats">Faltan: <span id="goal-remaining">$500</span></p>
+            </div>
+        </section>
+
         <section id="history" class="tab-content">
-            <header>
-                <h1>Historial</h1>
-            </header>
+            <header><h1>Movimientos</h1></header>
             <ul id="transaction-list" class="list-container"></ul>
         </section>
 
         <nav class="bottom-nav">
-            <div class="nav-item active" onclick="showTab('home', this)">
-                <i class="fas fa-home"></i>
-                <span>Inicio</span>
-            </div>
-            <div class="nav-item" onclick="showTab('history', this)">
-                <i class="fas fa-list-ul"></i>
-                <span>Historial</span>
-            </div>
+            <div class="nav-item active" onclick="showTab('home', this)"><i class="fas fa-chart-pie"></i><span>Panel</span></div>
+            <div class="nav-item" onclick="showTab('goals', this)"><i class="fas fa-bullseye"></i><span>Metas</span></div>
+            <div class="nav-item" onclick="showTab('history', this)"><i class="fas fa-history"></i><span>Lista</span></div>
         </nav>
     </div>
-
     <script src="script.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
-        
-        function showTab(tabId, element) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            element.classList.add('active');
-        }
-    </script>
 </body>
 </html>
