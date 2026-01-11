@@ -2,128 +2,59 @@
     --primary: #00dc82; --danger: #ff4757; --bg: #0f172a; --card: #1e293b; --text: #ffffff;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, sans-serif; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
 
-body { 
-    background: var(--bg); color: var(--text); 
-    height: 100vh; width: 100vw; overflow: hidden; 
-}
+body { background: var(--bg); color: var(--text); height: 100vh; width: 100vw; overflow: hidden; }
 
 .app-container { display: flex; flex-direction: column; height: 100vh; }
 
-header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
-header h1 { font-size: 20px; color: var(--primary); }
+header { padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+header h1 { font-size: 22px; font-weight: 800; }
 
-.tab-content { 
-    display: none; flex: 1; padding: 10px 20px; 
-    overflow-y: auto; padding-bottom: 100px; 
+.tab-content { display: none; flex: 1; padding: 0 20px 120px; overflow-y: auto; }
+.tab-content.active { display: block; }
+
+.balance-card {
+    background: linear-gradient(135deg, #1e293b, #334155);
+    padding: 30px 20px; border-radius: 25px; text-align: center; margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
 }
-.tab-content.active { display: flex; flex-direction: column; }
+.balance-card span { font-size: 12px; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px; }
+.balance-card h2 { font-size: 36px; margin-top: 5px; color: var(--primary); }
 
-/* FIX DEL GRÁFICO: Ahora es pequeño y centrado */
-.chart-box {
-    position: relative;
-    width: 180px; /* Tamaño fijo para que no explote */
-    height: 180px;
-    margin: 0 auto 20px;
+.quick-add, .goal-setup-card, .goal-card { 
+    background: var(--card); padding: 20px; border-radius: 20px; margin-bottom: 15px; 
 }
 
-.chart-overlay { 
-    position: absolute; top: 50%; left: 50%; 
-    transform: translate(-50%, -50%); text-align: center; 
-}
-.chart-overlay span { font-size: 22px; font-weight: bold; display: block; }
-
-/* INPUTS MÁS COMPACTOS */
-.quick-add { background: var(--card); padding: 15px; border-radius: 20px; margin-top: auto; }
-input, select { 
-    width: 100%; padding: 12px; margin-bottom: 8px; border-radius: 10px; 
-    background: #000; border: 1px solid #334155; color: #fff; font-size: 16px; 
+input, select {
+    width: 100%; padding: 14px; margin-bottom: 10px; border-radius: 12px;
+    background: #000; border: 1px solid #334155; color: #fff; font-size: 16px;
 }
 
 .grid-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-button { padding: 14px; border-radius: 12px; border: none; color: #fff; font-weight: bold; font-size: 14px; }
+button { padding: 15px; border-radius: 12px; border: none; color: #fff; font-weight: bold; cursor: pointer; }
 .btn-in { background: var(--primary); }
 .btn-out { background: var(--danger); }
+.btn-export { background: none; color: var(--primary); font-size: 20px; }
+
+/* METAS */
+.progress-bar { background: #000; height: 10px; border-radius: 10px; margin: 15px 0; overflow: hidden; }
+#progress-fill { background: var(--primary); height: 100%; width: 0%; transition: 0.5s; }
+.goal-info { display: flex; justify-content: space-between; font-size: 14px; }
 
 /* LISTA */
-.list-container { margin-top: 10px; }
 .item { 
-    background: var(--card); padding: 12px 15px; border-radius: 15px; 
-    margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;
+    background: var(--card); padding: 15px; border-radius: 15px; margin-bottom: 10px;
+    display: flex; justify-content: space-between; align-items: center;
 }
-.item h4 { font-size: 14px; }
-.item small { color: #94a3b8; font-size: 11px; }
+.item-actions { display: flex; align-items: center; gap: 12px; }
+.btn-delete { background: rgba(255,71,87,0.1); color: var(--danger); border: none; padding: 8px; border-radius: 8px; }
 
 /* NAV */
-.bottom-nav { 
-    position: fixed; bottom: 0; width: 100%; background: #1e293b; 
-    display: flex; justify-content: space-around; padding: 10px 0 25px; border-top: 1px solid #334155;
+.bottom-nav {
+    position: fixed; bottom: 0; width: 100%; background: #1e293b;
+    display: flex; justify-content: space-around; padding: 15px 0 30px;
 }
-.nav-item { color: #94a3b8; text-align: center; font-size: 11px; cursor: pointer; }
+.nav-item { color: #94a3b8; text-align: center; font-size: 11px; }
 .nav-item.active { color: var(--primary); }
-.nav-item i { display: block; font-size: 18px; margin-bottom: 3px; }
-/* --- MEJORAS DE LA LISTA DE MOVIMIENTOS --- */
-.list-container { 
-    margin-top: 10px; 
-    list-style: none; 
-}
-
-.item { 
-    background: var(--card); 
-    padding: 15px; 
-    border-radius: 18px; 
-    margin-bottom: 10px; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    border: 1px solid rgba(255,255,255,0.05);
-    transition: transform 0.2s;
-}
-
-.item:active { transform: scale(0.98); }
-
-.item h4 { 
-    font-size: 15px; 
-    margin-bottom: 3px; 
-    color: #fff; 
-}
-
-.item small { 
-    color: #94a3b8; 
-    font-size: 12px; 
-    display: block;
-}
-
-/* Contenedor de monto y basura */
-.item-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.item-actions strong {
-    font-size: 16px;
-    font-weight: 700;
-}
-
-/* Estilo del botón eliminar */
-.btn-delete {
-    background: rgba(255, 71, 87, 0.1);
-    border: none;
-    color: var(--danger);
-    width: 35px;
-    height: 35px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.btn-delete:active {
-    background: var(--danger);
-    color: #fff;
-    transform: scale(0.8);
-}
+.nav-item i { display: block; font-size: 20px; margin-bottom: 4px; }

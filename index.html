@@ -3,31 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Finanzas Pro Ultra</title>
+    <title>Finanzas Pro</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="app-container">
         <section id="home" class="tab-content active">
             <header>
-                <h1>Resumen Visual</h1>
-                <div class="header-actions">
-                    <button onclick="exportToCSV()" class="btn-export"><i class="fas fa-file-excel"></i></button>
-                </div>
+                <h1>Mi Saldo</h1>
+                <button onclick="exportToCSV()" class="btn-export"><i class="fas fa-file-download"></i></button>
             </header>
 
-            <div class="chart-container">
-                <canvas id="myChart"></canvas>
-                <div class="chart-overlay">
-                    <span id="total-balance">$0</span>
-                </div>
+            <div class="balance-card">
+                <span>Total Disponible</span>
+                <h2 id="total-balance">$0.00</h2>
             </div>
 
             <div class="quick-add">
+                <h3>Nuevo Movimiento</h3>
                 <input type="text" id="description" placeholder="¿En qué gastaste?">
-                <input type="number" id="amount" placeholder="Monto">
+                <input type="number" id="amount" placeholder="0.00">
                 <select id="category">
                     <option value="🍔 Comida">🍔 Comida</option>
                     <option value="🚗 Transporte">🚗 Transporte</option>
@@ -44,20 +40,23 @@
         </section>
 
         <section id="goals" class="tab-content">
-    <header>
-        <h1>Mis Metas</h1>
-        <button onclick="editGoal()" class="btn-export"><i class="fas fa-edit"></i></button>
-    </header>
-    <div class="goal-card">
-        <div class="goal-info">
-            <span>Objetivo: <strong id="goal-name">Cargando...</strong></span>
-            <span id="goal-percent">0%</span>
-        </div>
-        <div class="progress-bar"><div id="progress-fill"></div></div>
-        <p class="goal-stats">Faltan: <span id="goal-remaining">$0</span></p>
-        <p style="font-size: 10px; margin-top: 10px; opacity: 0.5;">*El progreso se basa en tu saldo actual.</p>
-    </div>
-</section>
+            <header><h1>Metas de Ahorro</h1></header>
+            <div class="goal-setup-card">
+                <input type="text" id="goal-name-input" placeholder="Nombre (ej: Laptop)">
+                <input type="number" id="goal-amount-input" placeholder="Monto objetivo">
+                <button onclick="updateGoalSettings()" class="btn-in" style="width: 100%;">Establecer Meta</button>
+            </div>
+            <div class="goal-card">
+                <div class="goal-info">
+                    <span id="goal-display-name">Sin meta</span>
+                    <span id="goal-percent">0%</span>
+                </div>
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <div class="goal-stats">
+                    <p>Faltan: <strong id="goal-remaining">$0</strong></p>
+                </div>
+            </div>
+        </section>
 
         <section id="history" class="tab-content">
             <header><h1>Movimientos</h1></header>
@@ -65,9 +64,9 @@
         </section>
 
         <nav class="bottom-nav">
-            <div class="nav-item active" onclick="showTab('home', this)"><i class="fas fa-chart-pie"></i><span>Panel</span></div>
+            <div class="nav-item active" onclick="showTab('home', this)"><i class="fas fa-wallet"></i><span>Inicio</span></div>
             <div class="nav-item" onclick="showTab('goals', this)"><i class="fas fa-bullseye"></i><span>Metas</span></div>
-            <div class="nav-item" onclick="showTab('history', this)"><i class="fas fa-history"></i><span>Lista</span></div>
+            <div class="nav-item" onclick="showTab('history', this)"><i class="fas fa-list-ul"></i><span>Lista</span></div>
         </nav>
     </div>
     <script src="script.js"></script>
