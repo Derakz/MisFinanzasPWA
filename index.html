@@ -3,41 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mi Control de Gastos</title>
+    <title>Finanzas Pro</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
 </head>
-<link rel="manifest" href="manifest.json">
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
-</script>
 <body>
-    <div class="container">
-        <h1>💰 Mis Finanzas</h1>
-        
-        <div class="balance">
-            <span>Saldo Total:</span>
-            <h2 id="total-balance">$0.00</h2>
-        </div>
 
-        <div class="form">
-            <input type="text" id="description" placeholder="¿En qué gastaste/ganaste?">
-            <input type="number" id="amount" placeholder="Monto (ej. 50.00)">
-            <div class="buttons">
-                <button onclick="addTransaction('income')" class="btn-income">Ingreso</button>
-                <button onclick="addTransaction('expense')" class="btn-expense">Gasto</button>
+    <div class="app-container">
+        <section id="home" class="tab-content active">
+            <header>
+                <h1>Hola, de nuevo 👋</h1>
+                <p>Gestiona tu dinero hoy</p>
+            </header>
+
+            <div class="main-card">
+                <span>Saldo Disponible</span>
+                <h2 id="total-balance">$0.00</h2>
             </div>
-        </div>
 
-        <h3>Historial</h3>
-        <ul id="transaction-list"></ul>
+            <div class="quick-add">
+                <h3>Añadir Movimiento</h3>
+                <input type="text" id="description" placeholder="Ej: Cena, Sueldo, Cine...">
+                <input type="number" id="amount" placeholder="0.00">
+                <div class="grid-btns">
+                    <button onclick="addTransaction('income')" class="btn-in"><i class="fas fa-arrow-up"></i> Ingreso</button>
+                    <button onclick="addTransaction('expense')" class="btn-out"><i class="fas fa-arrow-down"></i> Gasto</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="history" class="tab-content">
+            <header>
+                <h1>Historial</h1>
+            </header>
+            <ul id="transaction-list" class="list-container"></ul>
+        </section>
+
+        <nav class="bottom-nav">
+            <div class="nav-item active" onclick="showTab('home', this)">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </div>
+            <div class="nav-item" onclick="showTab('history', this)">
+                <i class="fas fa-list-ul"></i>
+                <span>Historial</span>
+            </div>
+        </nav>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<div class="chart-container" style="margin-top: 20px;">
-    <canvas id="myChart"></canvas>
-</div>
     <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+        
+        function showTab(tabId, element) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            element.classList.add('active');
+        }
+    </script>
 </body>
 </html>
