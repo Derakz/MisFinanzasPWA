@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Control de Gastos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<link rel="manifest" href="manifest.json">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
+<body>
+    <div class="container">
+        <h1>💰 Mis Finanzas</h1>
+        
+        <div class="balance">
+            <span>Saldo Total:</span>
+            <h2 id="total-balance">$0.00</h2>
+        </div>
+
+        <div class="form">
+            <input type="text" id="description" placeholder="¿En qué gastaste/ganaste?">
+            <input type="number" id="amount" placeholder="Monto (ej. 50.00)">
+            <div class="buttons">
+                <button onclick="addTransaction('income')" class="btn-income">Ingreso</button>
+                <button onclick="addTransaction('expense')" class="btn-expense">Gasto</button>
+            </div>
+        </div>
+
+        <h3>Historial</h3>
+        <ul id="transaction-list"></ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
