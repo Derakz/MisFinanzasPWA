@@ -1,91 +1,86 @@
 :root {
     --primary: #2ecc71;
     --danger: #e74c3c;
-    --bg: #f1f2f6;
-    --text: #2d3436;
+    --bg: #f5f6fa;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
 
 body { 
     font-family: -apple-system, sans-serif; 
-    background-color: var(--bg); 
+    background-color: var(--bg);
     display: flex;
-    justify-content: center;
-    min-height: 100vh;
+    justify-content: center; /* Centra horizontalmente */
     width: 100%;
+    min-height: 100vh;
 }
 
 .container { 
-    width: 100%;
-    max-width: 450px; /* Tamaño ideal para que no se vea gigante en PC */
-    padding: 15px;
+    width: 100%; /* Ocupa todo el ancho en móvil */
+    max-width: 480px; /* No se estira demasiado en PC */
+    padding: 20px;
     display: flex;
-    flex-direction: column; /* Apila todo uno debajo de otro */
-    align-items: center; /* Centra los elementos hijos */
+    flex-direction: column;
+    align-items: center; /* Centra todo el contenido interno */
 }
 
-/* LA DONA / SALDO */
+h1 { margin: 20px 0; font-size: 1.8rem; text-align: center; }
+
 .balance { 
-    width: 100%; /* Ocupa todo el ancho disponible */
-    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    width: 100%; /* Forzamos a que ocupe todo el ancho del contenedor */
+    background: var(--primary);
     color: white; 
-    padding: 40px 20px; 
-    border-radius: 25px; 
+    padding: 30px; 
+    border-radius: 20px; 
     text-align: center;
-    box-shadow: 0 10px 20px rgba(46, 204, 113, 0.2);
     margin-bottom: 20px;
 }
 
-#total-balance { font-size: 2.8rem; font-weight: bold; }
-
-/* EL FORMULARIO */
 .form { 
-    width: 100%;
+    width: 100%; 
     background: white;
     padding: 20px;
     border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     margin-bottom: 20px;
 }
 
 input { 
     width: 100%; 
     padding: 15px; 
-    margin-bottom: 15px; 
-    border: 2px solid #eee; 
-    border-radius: 12px; 
-    font-size: 16px; /* Evita el zoom automático en iPhone */
+    margin-bottom: 10px; 
+    border: 1px solid #ddd; 
+    border-radius: 10px;
+    font-size: 16px; /* Evita zoom molesto en iPhone */
 }
 
 .buttons { 
     display: grid; 
     grid-template-columns: 1fr 1fr; 
-    gap: 15px; 
+    gap: 10px; 
 }
 
-/* HISTORIAL */
-#transaction-list { width: 100%; }
+button { 
+    padding: 15px; 
+    border: none; 
+    border-radius: 10px; 
+    color: white; 
+    font-weight: bold;
+}
+
+.btn-income { background: var(--primary); }
+.btn-expense { background: var(--danger); }
+
+ul { width: 100%; list-style: none; }
 
 li { 
     background: white; 
-    margin-bottom: 10px; 
     padding: 15px; 
-    border-radius: 15px; 
-    display: flex; 
+    border-radius: 12px; 
+    margin-bottom: 8px;
+    display: flex;
     justify-content: space-between;
-    width: 100%;
-}
-
-/* AJUSTE PARA MODO HORIZONTAL (Si quieres que se vea distinto) */
-@media (orientation: landscape) {
-    .container {
-        max-width: 800px;
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Pone dona a un lado y form al otro */
-        gap: 20px;
-    }
-    .balance { grid-column: 1 / 2; }
-    .form { grid-column: 2 / 3; }
-    #transaction-list { grid-column: 1 / 3; }
 }
