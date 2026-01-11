@@ -46,15 +46,18 @@ function updateChart() {
     myChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['Ingresos', 'Gastos'],
             datasets: [{
                 data: [income || 1, expense || 0],
                 backgroundColor: ['#00dc82', '#ff4757'],
                 borderWidth: 0,
-                cutout: '85%'
+                cutout: '80%'
             }]
         },
-        options: { plugins: { legend: { display: false } } }
+        options: { 
+            responsive: true,
+            maintainAspectRatio: false, // IMPORTANTE: evita que crezca infinito
+            plugins: { legend: { display: false } } 
+        }
     });
 }
 
